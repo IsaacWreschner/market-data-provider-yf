@@ -4,7 +4,11 @@ from datetime import datetime
 from typing import Union
 
 
-def store_market_data(df: pd.DataFrame, symbol: str, timeframe: str, base_dir: str = ".cache"):  
+def store_market_data(df: pd.DataFrame, symbol: str, timeframe: str, base_dir: str = None) -> None:
+    if base_dir is None:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        base_dir = os.path.join(current_dir, ".cache")
+
     df = df.copy()
     df.reset_index(inplace=True)
     df.rename(columns={"Date": "Date", "Open": "Open", "High": "High", "Low": "Low", "Close": "Close"}, inplace=True)
