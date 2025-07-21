@@ -109,9 +109,9 @@ md = MarketData(
         margin=1
     )
 
-ticks = md.as_ticks() // [{datetime, price, buy_price, sell_price, index }, ...]
-candlesticks = md.as_candlesticks()  // [{datetime, open, close, low, index }, ...]
-df = md.as_df() // For manipulation
+ticks = md.as_ticks() # [{datetime, price, buy_price, sell_price, index }, ...]
+candlesticks = md.as_candlesticks()  # [{datetime, open, close, low, index }, ...]
+df = md.as_df() # For manipulation
 ```
 
 Built-in caching ensures that repeated requests for the same data are served instantly from disk.
