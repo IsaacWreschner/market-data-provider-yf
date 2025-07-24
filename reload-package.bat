@@ -2,14 +2,15 @@
 echo 📦 Building the package...
 python -m build
 
-for %%f in (dist\*.whl) do (
-    set "WHEEL_FILE=%%f"
+:: Find the most recently modified .whl file
+for /f "delims=" %%f in ('dir /b /a:-d /o-d dist\*.whl') do (
+    set "WHEEL_FILE=dist\%%f"
     goto :found
 )
-:found
 
+:found
 echo 📥 Installing %WHEEL_FILE%...
-pip install --force-reinstall %WHEEL_FILE%
+pip install --force-reinstall "%WHEEL_FILE%"
 
 echo ✅ Package reloaded successfully!
 pause

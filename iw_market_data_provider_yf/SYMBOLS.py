@@ -14,7 +14,7 @@ SYMBOLS = {
 
     "GC=F": {"id": "GC=F", "description": "Gold Futures", "pip_point": 1.0},
     "SI=F": {"id": "SI=F", "description": "Silver Futures", "pip_point": 0.01},
-    "CL=F": {"id": "CL=F", "description": "Crude Oil Futures", "pip_point": 0.001},
+    "CL=F": {"id": "CL=F", "description": "Crude Oil Futures", "pip_point": 0.01},
 
     "BTC-USD": {"id": "BTC-USD", "description": "Bitcoin to USD", "pip_point": 1 },
     "ETH-USD": {"id": "ETH-USD", "description": "Ethereum to USD", "pip_point": 1 },
