@@ -1,13 +1,13 @@
 @echo off
-echo 📦 Building the package...
+echo [BUILD] Building the package...
 
 REM Check if build module is installed
 py -c "import build" 2>nul
 if errorlevel 1 (
-    echo ❌ Build module not found. Installing build...
+    echo [ERROR] Build module not found. Installing build...
     pip install build
     if errorlevel 1 (
-        echo ❌ Failed to install build module
+        echo [ERROR] Failed to install build module
         pause
         exit /b 1
     )
@@ -15,7 +15,7 @@ if errorlevel 1 (
 
 python -m build
 if errorlevel 1 (
-    echo ❌ Build failed
+    echo [ERROR] Build failed
     pause
     exit /b 1
 )
@@ -26,13 +26,13 @@ for %%f in (dist\*.whl) do (
 )
 :found
 
-echo 📥 Installing %WHEEL_FILE%...
+echo [INSTALL] Installing %WHEEL_FILE%...
 pip install --force-reinstall %WHEEL_FILE%
 if errorlevel 1 (
-    echo ❌ Installation failed
+    echo [ERROR] Installation failed
     pause
     exit /b 1
 )
 
-echo ✅ Package reloaded successfully!
+echo [SUCCESS] Package reloaded successfully!
 pause
