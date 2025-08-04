@@ -65,6 +65,8 @@ This package is not yet published to PyPI. To use it locally:
 
 1. Clone the repository or copy the library folder to your project.
 
+
+
 2. Choose one of the following build options:
 
    - **Option 1: Recommended — Use the reload script**
@@ -82,6 +84,11 @@ This package is not yet published to PyPI. To use it locally:
      These scripts will build and reinstall the package automatically.
 
    - **Option 2: Manual Build and Install**
+
+     First, install the build module (if not already installed):
+     ```bash
+     pip install build
+     ```
 
      Build the package:
      ```bash
