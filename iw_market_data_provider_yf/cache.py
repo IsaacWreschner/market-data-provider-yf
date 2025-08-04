@@ -46,7 +46,7 @@ def retrieve_market_data(symbol: str, start_date: Union[str, datetime], end_date
             month_start = datetime(year, month, 1)
             if month_start > end_date:
                 break
-            if month_start < start_date.replace(day=1):
+            if month_start < start_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0):
                 continue
 
             file_path = os.path.join(symbol_dir, str(year), f"{month:02}", f"{timeframe}.data.csv")
@@ -63,7 +63,7 @@ def retrieve_market_data(symbol: str, start_date: Union[str, datetime], end_date
             all_data.append(filtered_df)
 
     if not all_data:
-        print("[INFO] No data loaded.")
+        print("[INFO] Cache service: Not all data files found locally, so returns None.")
         return None
 
     print(f"[INFO] Retrieved data from {len(all_data)} files.")
