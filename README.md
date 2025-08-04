@@ -65,6 +65,8 @@ This package is not yet published to PyPI. To use it locally:
 
 1. Clone the repository or copy the library folder to your project.
 
+
+
 2. Choose one of the following build options:
 
    - **Option 1: Recommended — Use the reload script**
@@ -83,6 +85,11 @@ This package is not yet published to PyPI. To use it locally:
 
    - **Option 2: Manual Build and Install**
 
+     First, install the build module (if not already installed):
+     ```bash
+     pip install build
+     ```
+
      Build the package:
      ```bash
      python -m build
@@ -100,27 +107,18 @@ Import the main interface and fetch data:
 ```python
 from iw_market_data_provider_yf import MarketData
 
-md = MarketData()
-
 # Fetch 1-minute data for AAPL from July 1 to July 10, 2024
-df = md.get_data(
-    symbol="AAPL",
-    start_date="2024-07-01",
-    end_date="2024-07-10",
-    timeframe="1m"
-)
+md = MarketData(
+        symbol="AAPL",
+        start_date="2024-07-01",
+        end_date="2024-07-10",
+        timeframe="1m"
+        margin=1
+    )
 
-print(df.head())
-```
-
-You can also get just the closing prices or full candlestick arrays:
-
-```python
-# Close prices
-closes = md.get_close_array("AAPL", "2024-07-01", "2024-07-10", "1h")
-
-# OHLC candlesticks as tuples
-bars = md.get_bar_array("AAPL", "2024-07-01", "2024-07-10", "1d")
+ticks = md.as_ticks() # [{datetime, price, buy_price, sell_price, index }, ...]
+candlesticks = md.as_candlesticks()  # [{datetime, open, close, low, index }, ...]
+df = md.as_df() # For manipulation
 ```
 
 Built-in caching ensures that repeated requests for the same data are served instantly from disk.
