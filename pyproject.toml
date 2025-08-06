@@ -3,11 +3,6 @@ name = "iw_market_data_provider_yf"
 version = "0.3"
 description = "Market data provider using yfinance"
 authors = [{ name="Isaac Wreschner", email="isaac.wreschner@example.com" }]
-dependencies = [
-    "pandas==2.0.3",
-    "yfinance==0.2.57",
-    "numpy==1.26.4"
-]
 
 [build-system]
 requires = ["setuptools"]

@@ -1,6 +1,12 @@
 @echo off
 echo [BUILD] Building the package...
 
+echo [DEPS] Installing dependencies with pre-built wheels...
+pip install --upgrade numpy pandas --only-binary=all
+if errorlevel 1 (
+    echo [WARNING] Dependency installation failed, continuing anyway...
+)
+
 REM Check if build module is installed
 py -c "import build" 2>nul
 if errorlevel 1 (
@@ -25,6 +31,7 @@ for /f "delims=" %%f in ('dir /b /a:-d /o-d dist\*.whl') do (
     set "WHEEL_FILE=dist\%%f"
     goto :found
 )
+:found
 
 echo [INSTALL] Installing %WHEEL_FILE%...
 pip install --force-reinstall %WHEEL_FILE%
