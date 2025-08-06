@@ -29,6 +29,9 @@ def store_market_data(df: pd.DataFrame, symbol: str, timeframe: str, base_dir: s
 
 
 def retrieve_market_data(symbol: str, start_date: Union[str, datetime], end_date: Union[str, datetime], timeframe: str, base_dir: str = ".cache") -> Union[pd.DataFrame, None]:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.join(current_dir, base_dir)
+
     start_date = pd.to_datetime(start_date)
     end_date = pd.to_datetime(end_date)
 
@@ -43,7 +46,7 @@ def retrieve_market_data(symbol: str, start_date: Union[str, datetime], end_date
             month_start = datetime(year, month, 1)
             if month_start > end_date:
                 break
-            if month_start < start_date.replace(day=1):
+            if month_start < start_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0):
                 continue
 
             file_path = os.path.join(symbol_dir, str(year), f"{month:02}", f"{timeframe}.data.csv")
@@ -60,7 +63,7 @@ def retrieve_market_data(symbol: str, start_date: Union[str, datetime], end_date
             all_data.append(filtered_df)
 
     if not all_data:
-        print("[INFO] No data loaded.")
+        print("[INFO] Cache service: Not all data files found locally, so returns None.")
         return None
 
     print(f"[INFO] Retrieved data from {len(all_data)} files.")

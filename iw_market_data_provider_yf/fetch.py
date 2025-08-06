@@ -38,6 +38,8 @@ def fetch_market_data(symbol: str, timeframe: str, start_datetime: datetime, end
         return local_data
 
     # Snap to full month
+    print
+    (f"[INFO] Fetching data externally since local data not found for {symbol} from {start_datetime} to {end_datetime}")
     month_start, month_end = snap_date_to_month_start(start_datetime), snap_date_to_month_end(end_datetime)
     print(f"[DEBUG] Fetching data from {month_start} to {month_end}")
     period1_tostr, period2_tostr = create_period_str(month_start, month_end)

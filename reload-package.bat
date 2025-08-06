@@ -20,11 +20,11 @@ if errorlevel 1 (
     exit /b 1
 )
 
-for %%f in (dist\*.whl) do (
-    set "WHEEL_FILE=%%f"
+:: Find the most recently modified .whl file
+for /f "delims=" %%f in ('dir /b /a:-d /o-d dist\*.whl') do (
+    set "WHEEL_FILE=dist\%%f"
     goto :found
 )
-:found
 
 echo [INSTALL] Installing %WHEEL_FILE%...
 pip install --force-reinstall %WHEEL_FILE%
@@ -36,3 +36,4 @@ if errorlevel 1 (
 
 echo [SUCCESS] Package reloaded successfully!
 pause
+

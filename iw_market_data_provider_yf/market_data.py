@@ -40,7 +40,7 @@ class MarketData:
 
 
 
-    def get_raw_data(self) -> pd.DataFrame:
+    def as_dataframe(self) -> pd.DataFrame:
         return self._raw_data.copy()
     
     def as_candlesticks(self) -> List[candlestick]:
@@ -61,7 +61,7 @@ class MarketData:
             for i, row in enumerate(data_rows)
         ]
     
-    def as_single_ticks(self) -> List[tick]:
+    def as_ticks(self) -> List[tick]:
         json_data = loads(self._raw_data_copy.to_json(orient="split"))
         column_names = [col for col in json_data.get('columns', [])]
         data_rows = json_data['data']
